@@ -1,5 +1,6 @@
 import sys
 import math
+from itertools import permutations
 
 def NearestNeighbor(arr):
     p = arr[0]
@@ -29,7 +30,30 @@ def NearestNeighbor(arr):
         else:
             smallestPosition[2] = 1
             total += smallestDistance
-    print(f"{total:.3f}")
+    return total
+
+def OptimalTSP(arr):
+    d = math.inf
+    first = True
+    for perm in permutations(arr):
+        if first:
+            first = False
+            xInit = perm[0][0]
+            yInit = perm[0][1]
+        distance = 0
+        x = perm[0][0]
+        y = perm[0][1]
+        if x != xInit and y != yInit:
+            break
+        for i in range(1, len(perm)):
+           distance += math.sqrt(math.pow(perm[i][0]-x, 2) + pow(perm[i][1] - y, 2))
+           x = perm[i][0]
+           y = perm[i][1]
+        distance += math.sqrt(math.pow(perm[0][0]-perm[-1][0], 2) + pow(perm[0][1] - perm[-1][1], 2))
+        if distance < d:
+            d = distance
+    print(f"{d:.3f}")
+
 
 
 
@@ -41,9 +65,10 @@ with open(sys.argv[1], "r") as inputFile:
 
 n = arr[0]
 point = []
-for i in range(1, len(arr)):
+for i in range(1, int(n)+1):
     temp = arr[i].split(" ")
     p = [int(temp[0]), int(temp[1]), 0]
     point.append(p)
 
-NearestNeighbor(point)
+
+OptimalTSP(point)
