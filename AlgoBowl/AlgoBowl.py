@@ -24,7 +24,6 @@ finalArr = []
 #         prev_used.add(cur_num)
 
 def whileLoop(cur_num):
-    greatestNum = 0
     while(True):
         if (cur_num in prev_used):
             return
