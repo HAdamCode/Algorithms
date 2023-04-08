@@ -12,7 +12,6 @@ def T(i, j):
     return max(l[i] + min(T(i + 2, j), T(i + 1, j - 1)), l[j] + min(T(i + 1, j - 1), T(i, j - 2)))
 
 numberOfValues= 0
-segmentNumbers = []
 l = []
 with open(sys.argv[1], 'r') as file:
     i = 0
@@ -29,6 +28,5 @@ for line in lineStringList:
         continue
     l.append(int(line))
 print(numberOfValues)
-print('Max value:', T(0, numberOfValues-2))
+print('Max value:', T(0, numberOfValues-1))
 print('The number function calls:', numberOfCalls)
-print(segmentNumbers)
