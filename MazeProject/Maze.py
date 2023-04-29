@@ -1,4 +1,5 @@
 import networkx as nx
+import matplotlib.pyplot as p
 import sys
 
 G = nx.DiGraph()
@@ -91,7 +92,9 @@ for node in G.nodes:
                 if color == colorPath or pathType == pathTypePath:
                     G.add_edge(node, path)
             
-                    
+pos = nx.spring_layout(G, k=.7, iterations=20)
+nx.draw(G, with_labels = True, pos = pos)
+p.savefig('peopleEatDogsSometimes.png')            
 thePaths = nx.all_shortest_paths(G, startingNode, endingNode)
 output = ''
 listOfPaths = []
